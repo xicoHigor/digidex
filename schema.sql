@@ -101,6 +101,48 @@ SELECT
     (SELECT STRING_AGG(g.nome, ', ' ORDER BY g.nome)
        FROM digimon_grupos AS dg
        JOIN grupos AS g ON g.id = dg.grupo_id
-      WHERE dg.digimon_id = d.id) AS grupos
+      WHERE dg.digimon_id = d.id) AS grupos,
+    COALESCE(
+        (SELECT JSONB_AGG(
+                    JSONB_BUILD_OBJECT(
+                        'id', h.id,
+                        'nome', h.nome,
+                        'traducao', h.traducao,
+                        'descricao', h.descricao
+                    ) ORDER BY h.nome, h.id
+                )
+           FROM digimon_habilidades AS dh
+           JOIN habilidades AS h ON h.id = dh.habilidade_id
+          WHERE dh.digimon_id = d.id),
+        '[]'::JSONB
+    ) AS habilidades,
+    COALESCE(
+        (SELECT JSONB_AGG(
+                    JSONB_BUILD_OBJECT(
+                        'id', destino.id,
+                        'nome', destino.nome,
+                        'imagem_url', destino.imagem_url,
+                        'condicao', e.condicao
+                    ) ORDER BY destino.nome, destino.id
+                )
+           FROM evolucoes AS e
+           JOIN digimon AS destino ON destino.id = e.digimon_destino_id
+          WHERE e.digimon_origem_id = d.id),
+        '[]'::JSONB
+    ) AS evolucoes_para,
+    COALESCE(
+        (SELECT JSONB_AGG(
+                    JSONB_BUILD_OBJECT(
+                        'id', origem.id,
+                        'nome', origem.nome,
+                        'imagem_url', origem.imagem_url,
+                        'condicao', e.condicao
+                    ) ORDER BY origem.nome, origem.id
+                )
+           FROM evolucoes AS e
+           JOIN digimon AS origem ON origem.id = e.digimon_origem_id
+          WHERE e.digimon_destino_id = d.id),
+        '[]'::JSONB
+    ) AS evolucoes_de
 FROM digimon AS d;
 
