@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f3f1ff">
+  <title>DigiDex — guia do Mundo Digital</title>
+  <style>
+    :root{--ink:#20213c;--muted:#74758f;--paper:#fff;--canvas:#f5f4fb;--line:#e8e6f2;--violet:#7254d5;--violet-deep:#4f3c9e;--mint:#72d8c0;--sun:#ffc86a;--soft:#ede9ff;--shadow:0 18px 55px rgba(48,40,99,.09)}
+    *{box-sizing:border-box}body{margin:0;background:radial-gradient(ellipse at 8% 0%,#e9e4ff 0,transparent 30%),radial-gradient(ellipse at 95% 7%,#e3f8f1 0,transparent 25%),var(--canvas);color:var(--ink);font:500 14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;min-height:100vh}
+    button,input,select{font:inherit}button{color:inherit}.page{max-width:1450px;margin:auto;padding:28px 28px 36px}.topbar{display:flex;align-items:center;justify-content:space-between;gap:18px;margin-bottom:24px}.brand{display:flex;align-items:center;gap:12px}.brand-mark{width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,#8d77ed,#6347c4);box-shadow:0 8px 22px #7254d542;display:grid;place-items:center;color:white;font-size:25px;position:relative}.brand-mark:after{content:"";position:absolute;inset:6px;border:1px solid #ffffff70;border-radius:11px}.brand-copy{line-height:1.15}.brand-name{font-weight:850;font-size:19px;letter-spacing:-.7px}.brand-tag{font-size:11px;color:var(--muted);margin-top:5px}.status{display:flex;align-items:center;gap:8px;border:1px solid #ded9f5;background:#ffffffa8;border-radius:99px;padding:8px 12px;color:var(--violet-deep);font-size:11px;font-weight:700}.status-dot{width:7px;height:7px;border-radius:50%;background:#5ac5a9;box-shadow:0 0 0 4px #5ac5a91d}
+    .intro{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;margin:12px 0 20px}.eyebrow{margin:0 0 7px;text-transform:uppercase;letter-spacing:1.6px;font-size:10px;font-weight:800;color:var(--violet)}h1{font-size:clamp(28px,4vw,42px);line-height:1.06;letter-spacing:-1.7px;margin:0}.intro-copy{color:var(--muted);margin:9px 0 0;max-width:580px;font-size:13px}.total-pill{flex:none;text-align:right;color:var(--muted);font-size:11px}.total-pill strong{display:block;color:var(--ink);font-size:19px;letter-spacing:-.5px}
+    .workspace{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(315px,.78fr);gap:18px;align-items:start}.catalog,.profile{background:#ffffffc9;border:1px solid #e8e6f2;border-radius:21px;box-shadow:var(--shadow);overflow:hidden}.catalog{padding:17px}.toolbar{display:grid;grid-template-columns:minmax(180px,1fr) minmax(130px,.55fr) minmax(135px,.55fr);gap:9px;margin-bottom:13px}.searchbox{position:relative}.searchbox .search-icon{position:absolute;left:13px;top:50%;transform:translateY(-50%);color:#9492ae;font-size:16px;pointer-events:none}.toolbar input,.toolbar select{height:42px;border:1px solid var(--line);border-radius:11px;background:#fff;color:var(--ink);outline:none;padding:0 12px;min-width:0}.toolbar input{width:100%;padding-left:38px}.toolbar input:focus,.toolbar select:focus{border-color:#b5a8ee;box-shadow:0 0 0 3px #8d77ed20}.toolbar input::placeholder{color:#9a99ac}.toolbar select{font-size:12px}.catalog-summary{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 2px 12px;color:var(--muted);font-size:11px}.catalog-summary strong{color:var(--ink)}.catalog-summary .source-hint{white-space:nowrap}
+    .grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}.card{appearance:none;border:1px solid var(--line);border-radius:15px;text-align:left;background:#fff;padding:8px;min-width:0;cursor:pointer;transition:transform .16s,border-color .16s,box-shadow .16s;position:relative;overflow:hidden}.card:hover{transform:translateY(-3px);border-color:#c5b9f4;box-shadow:0 8px 20px #45328b16}.card.active{border-color:#9b88ed;box-shadow:0 0 0 2px #7254d526}.card-art{height:104px;border-radius:10px;background:linear-gradient(145deg,#f0edff,#e9fbf5);display:grid;place-items:center;overflow:hidden;position:relative}.card-art:before{content:"";position:absolute;width:66px;height:66px;border-radius:50%;background:#ffffff88;filter:blur(1px)}.card-art img{position:relative;width:100%;height:100%;object-fit:contain;padding:7px;transition:transform .2s}.card:hover .card-art img{transform:scale(1.06)}.art-fallback{position:absolute;color:#8a78d1;font-size:28px}.card-id{display:block;margin:8px 2px 1px;color:#9291a8;font-size:9px;font-weight:750;letter-spacing:.65px}.card-name{display:block;margin:0 2px;color:var(--ink);font-size:12px;font-weight:760;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.card-foot{display:flex;align-items:center;gap:5px;margin:4px 2px 1px;color:#83819a;font-size:9px}.tiny-dot{width:5px;height:5px;border-radius:50%;background:var(--mint)}.empty{grid-column:1/-1;text-align:center;color:var(--muted);padding:34px 16px;border:1px dashed #d9d5eb;border-radius:14px;background:#fff}.more-row{display:flex;justify-content:center;margin:14px 0 0}.more{border:1px solid #d9d4ef;border-radius:10px;background:#fff;padding:9px 14px;color:var(--violet-deep);font-size:11px;font-weight:700;cursor:pointer}.more:hover{background:var(--soft)}.notice{display:none;margin:0 0 12px;padding:9px 11px;border-radius:10px;background:#fff4df;color:#71521c;font-size:11px}.notice.show{display:block}
+    .profile{position:sticky;top:16px}.profile-top{position:relative;padding:19px 18px 16px;background:linear-gradient(145deg,#f0edff,#e8f8f3);min-height:235px;overflow:hidden}.profile-top:before,.profile-top:after{content:"";position:absolute;border:1px solid #ffffff94;border-radius:50%;pointer-events:none}.profile-top:before{width:240px;height:240px;right:-90px;top:-125px}.profile-top:after{width:160px;height:160px;right:-50px;top:-84px}.profile-kicker{position:relative;z-index:1;color:var(--violet-deep);font-size:9px;font-weight:850;letter-spacing:1.2px}.profile-id{float:right;color:#777394;font-size:9px;font-weight:750;letter-spacing:.5px}.portrait{position:absolute;right:13px;bottom:2px;width:155px;height:155px;display:grid;place-items:center}.portrait:before{content:"";position:absolute;width:125px;height:125px;background:#ffffffab;border-radius:50%}.portrait img{position:relative;max-width:100%;max-height:100%;object-fit:contain;filter:drop-shadow(0 9px 7px #43367c21)}.profile-title{position:relative;z-index:1;margin:23px 0 0;max-width:65%;font-size:27px;line-height:1.08;letter-spacing:-1.1px}.badge-row{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:5px;margin-top:11px;max-width:62%}.badge{display:inline-flex;align-items:center;border-radius:99px;padding:4px 8px;background:#fff;color:#504578;font-size:9px;font-weight:750;box-shadow:0 2px 8px #5447950c}.profile-body{padding:15px 17px 18px}.section-title{margin:0 0 9px;font-size:10px;text-transform:uppercase;letter-spacing:1.1px;color:#77758e;font-weight:850}.facts{display:grid;grid-template-columns:1fr 1fr;gap:7px}.fact{border:1px solid #eeecf5;border-radius:11px;padding:8px 10px;background:#fff}.fact-label{display:block;color:#908ea5;font-size:9px;margin-bottom:2px}.fact-value{display:block;color:var(--ink);font-size:11px;font-weight:750;line-height:1.35}.profile-section{border-top:1px solid #eeecf4;margin-top:13px;padding-top:12px}.description{margin:0;color:#62627d;font-size:11px;line-height:1.55}.lang-note{display:block;margin-top:5px;color:#aaa8b9;font-size:9px}.skills{display:grid;gap:6px}.skill{padding:8px 9px;border:1px solid #efedf5;border-radius:10px;background:#fff}.skill-name{font-size:10px;font-weight:750;color:#363452}.skill-desc{font-size:9px;color:#77758d;margin-top:2px;line-height:1.4}.evo-row{display:flex;flex-wrap:wrap;gap:6px}.evo-chip{appearance:none;border:1px solid #e7e2f5;border-radius:99px;background:#fff;color:#53487d;padding:6px 9px;font-size:9px;font-weight:700;cursor:pointer}.evo-chip:hover{background:#f0edff;border-color:#b7a8ef}.no-data{font-size:10px;color:#a09eaf}.loading-state{padding:28px 16px;color:#77758e;text-align:center;font-size:11px}.spinner{width:22px;height:22px;margin:0 auto 9px;border:2px solid #e4defa;border-top-color:var(--violet);border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+    .footer{display:flex;justify-content:space-between;gap:14px;margin:14px 4px 0;color:#8f8da5;font-size:9px}.footer a{color:var(--violet-deep);text-decoration:none}.footer a:hover{text-decoration:underline}
+    @media(max-width:1100px){.grid{grid-template-columns:repeat(4,minmax(0,1fr))}.workspace{grid-template-columns:minmax(0,1.25fr) minmax(300px,.8fr)}}@media(max-width:820px){.page{padding:20px 16px}.workspace{grid-template-columns:1fr}.profile{position:static;grid-row:1}.catalog{grid-row:2}.profile-top{min-height:218px}.grid{grid-template-columns:repeat(5,minmax(0,1fr))}}@media(max-width:600px){.topbar{align-items:flex-start}.status{font-size:0;padding:10px}.status-dot{width:8px;height:8px}.intro{display:block}.total-pill{text-align:left;margin-top:13px}.total-pill strong{display:inline;margin-right:5px;font-size:15px}.toolbar{grid-template-columns:1fr 1fr}.searchbox{grid-column:1/-1}.grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.card-art{height:88px}.catalog{padding:12px}.profile-top{min-height:205px}.profile-title{font-size:24px}.catalog-summary .source-hint{display:none}.footer{display:block}.footer span{display:block;margin-top:4px}}@media(max-width:390px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.profile-title{max-width:70%}.badge-row{max-width:68%}}
+  </style>
+  <script src="catalog.js"></script>
+</head>
+<body>
+  <main class="page" id="digidex">
+    <header class="topbar">
+      <div class="brand"><div class="brand-mark" aria-hidden="true">✦</div><div class="brand-copy"><div class="brand-name">DigiDex</div><div class="brand-tag">guia de campo do Mundo Digital</div></div></div>
+      <div class="status"><span class="status-dot"></span>Catálogo carregado</div>
+    </header>
+    <section class="intro">
+      <div><p class="eyebrow">Arquivo digital · edição inicial</p><h1>Conheça seu próximo parceiro.</h1><p class="intro-copy">Explore espécies, níveis, atributos e caminhos de evolução. Escolha um Digimon para abrir a ficha completa.</p></div>
+      <div class="total-pill"><strong id="total-count">1.488</strong>registros catalogados</div>
+    </section>
+    <div class="workspace">
+      <section class="catalog" aria-label="Catálogo de Digimon">
+        <div class="toolbar">
+          <label class="searchbox"><span class="search-icon" aria-hidden="true">⌕</span><input id="search" type="search" placeholder="Buscar nome ou ID…" aria-label="Buscar por nome ou ID"></label>
+          <select id="level-filter" aria-label="Filtrar por nível"><option value="">Todos os níveis</option><option value="Baby I">Bebê I</option><option value="Baby II">Bebê II</option><option value="Child">Criança</option><option value="Adult">Adulto</option><option value="Perfect">Perfeito</option><option value="Ultimate">Ultimate</option><option value="Armor">Armadura</option><option value="Hybrid">Híbrido</option><option value="Unknown">Desconhecido</option></select>
+          <select id="attribute-filter" aria-label="Filtrar por atributo"><option value="">Todos os atributos</option><option value="Data">Dados</option><option value="Free">Livre</option><option value="Virus">Vírus</option><option value="Vaccine">Vacina</option><option value="Variable">Variável</option><option value="Unknown">Desconhecido</option><option value="No Data">Sem dados</option></select>
+        </div>
+        <p class="notice" id="notice" role="status"></p>
+        <div class="catalog-summary"><span id="count" aria-live="polite"></span><span class="source-hint">IDs seguem a base consultada</span></div>
+        <div class="grid" id="grid"></div>
+        <div class="more-row" id="more-row"></div>
+      </section>
+      <aside class="profile" id="profile" aria-label="Ficha do Digimon selecionado" aria-live="polite"></aside>
+    </div>
+    <footer class="footer"><span>Dados e imagens: <a href="https://digi-api.com/" target="_blank" rel="noreferrer">DAPI · Digimon API</a>. As fichas detalhadas são carregadas ao selecionar um registro.</span><span>Projeto independente de consulta.</span></footer>
+  </main>
+  <script>
+    (() => {
+      const catalog = Array.isArray(window.DIGIDEX_CATALOG) ? window.DIGIDEX_CATALOG : [];
+      const search = document.getElementById('search');
+      const levelFilter = document.getElementById('level-filter');
+      const attributeFilter = document.getElementById('attribute-filter');
+      const grid = document.getElementById('grid');
+      const profile = document.getElementById('profile');
+      const count = document.getElementById('count');
+      const moreRow = document.getElementById('more-row');
+      const notice = document.getElementById('notice');
+      const PAGE_SIZE = 35;
+      const levelPt = {'Baby I':'Bebê I','Baby II':'Bebê II','Child':'Criança','Adult':'Adulto','Perfect':'Perfeito','Ultimate':'Ultimate','Armor':'Armadura','Hybrid':'Híbrido','Unknown':'Desconhecido'};
+      const attributePt = {'Data':'Dados','Free':'Livre','Virus':'Vírus','Vaccine':'Vacina','Variable':'Variável','Unknown':'Desconhecido','No Data':'Sem dados'};
+      const featured = ['Agumon','Gabumon','Piyomon','Tentomon','Palmon','Gomamon','Patamon','Tailmon','V-mon','Wormmon','Guilmon','Terriermon','Renamon','Impmon','Greymon','Garurumon','War Greymon','Metal Garurumon','Angemon','Angewomon','Omegamon'];
+      const featuredRank = new Map(featured.map((name,index) => [name,index]));
+      const byId = new Map(catalog.map(item => [Number(item.id),item]));
+      const detailCache = new Map();
+      let results = catalog.slice();
+      let selectedId = 1;
+      let visibleCount = PAGE_SIZE;
+      let filterRequest = 0;
+
+      const esc = value => String(value ?? '').replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
+      const pt = (value, dictionary) => dictionary[value] || value;
+      const assetId = id => String(id).padStart(4,'0');
+      const showNotice = message => { notice.textContent = message; notice.classList.toggle('show', Boolean(message)); };
+      const cardList = () => {
+        const query = search.value.trim().toLocaleLowerCase('pt-BR');
+        let list = results.filter(item => !query || item.name.toLocaleLowerCase('pt-BR').includes(query) || String(item.id).includes(query));
+        if (!query && !levelFilter.value && !attributeFilter.value) {
+          list = list.slice().sort((a,b) => (featuredRank.get(a.name) ?? 9999) - (featuredRank.get(b.name) ?? 9999) || a.id - b.id);
+        }
+        return list;
+      };
+      const render = () => {
+        const list = cardList();
+        const items = list.slice(0,visibleCount);
+        count.innerHTML = '<strong>' + list.length.toLocaleString('pt-BR') + '</strong> resultados · exibindo ' + items.length.toLocaleString('pt-BR');
+        grid.innerHTML = items.length ? items.map(item => {
+          const active = Number(item.id) === Number(selectedId);
+          const image = item.image || '';
+          return '<button class="card' + (active ? ' active' : '') + '" type="button" data-id="' + Number(item.id) + '" aria-pressed="' + active + '" aria-label="Abrir ficha de ' + esc(item.name) + '">' +
+            '<span class="card-art"><span class="art-fallback" aria-hidden="true">✦</span><img src="' + esc(image) + '" alt="" loading="lazy" onerror="this.hidden=true"></span>' +
+            '<span class="card-id">DAPI · ' + assetId(item.id) + '</span><span class="card-name">' + esc(item.name) + '</span><span class="card-foot"><span class="tiny-dot"></span>abrir ficha</span></button>';
+        }).join('') : '<div class="empty">Nenhum Digimon encontrado com esses filtros.</div>';
+        const rest = list.length - items.length;
+        moreRow.innerHTML = rest > 0 ? '<button type="button" class="more" id="show-more">Carregar mais ' + rest.toLocaleString('pt-BR') + '</button>' : '';
+      };
+      const listNames = (items, field) => (items || []).map(item => item[field]).filter(Boolean);
+      const badges = values => values.length ? values.map(value => '<span class="badge">' + esc(value) + '</span>').join('') : '<span class="badge">Sem registro</span>';
+      const fact = (label,value) => '<div class="fact"><span class="fact-label">' + esc(label) + '</span><span class="fact-value">' + esc(value || 'Sem registro') + '</span></div>';
+      const evolutionButtons = (entries, emptyLabel) => entries && entries.length ? entries.slice(0,8).map(item => '<button type="button" class="evo-chip" data-open-id="' + Number(item.id) + '" title="Abrir ficha de ' + esc(item.digimon) + '">' + esc(item.digimon) + '</button>').join('') : '<span class="no-data">' + emptyLabel + '</span>';
+
+      const renderUnavailable = item => {
+        const image = item.image || '';
+        profile.innerHTML = '<div class="profile-top"><div class="profile-kicker">FICHA DE CAMPO <span class="profile-id">DAPI · ' + assetId(item.id) + '</span></div><div class="portrait"><img src="' + esc(image) + '" alt="" onerror="this.hidden=true"></div><h2 class="profile-title">' + esc(item.name) + '</h2><div class="badge-row"><span class="badge">Catálogo local</span></div></div><div class="profile-body"><p class="description">O registro básico está disponível. Não foi possível carregar os detalhes ampliados da fonte agora.</p><span class="lang-note">Tente selecionar este Digimon novamente quando a conexão estiver disponível.</span></div>';
+      };
+      const renderDetail = data => {
+        const item = byId.get(Number(data.id)) || {id:data.id,name:data.name,image:(data.images || [])[0]?.href || ''};
+        const image = ((data.images || [])[0] || {}).href || item.image || '';
+        const levels = listNames(data.levels,'level').map(value => pt(value,levelPt));
+        const types = listNames(data.types,'type');
+        const attributes = listNames(data.attributes,'attribute').map(value => pt(value,attributePt));
+        const fields = listNames(data.fields,'field');
+        const english = (data.descriptions || []).find(desc => desc.language === 'en_us') || (data.descriptions || []).find(desc => desc.language === 'en');
+        const description = english ? english.description : '';
+        const skills = (data.skills || []).slice(0,3);
+        const release = data.releaseDate || 'Sem registro';
+        profile.innerHTML = '<div class="profile-top"><div class="profile-kicker">FICHA DE CAMPO <span class="profile-id">DAPI · ' + assetId(data.id) + '</span></div><div class="portrait"><img src="' + esc(image) + '" alt="Ilustração de ' + esc(data.name) + '" onerror="this.hidden=true"></div><h2 class="profile-title">' + esc(data.name) + '</h2><div class="badge-row">' + badges(levels) + '</div></div>' +
+          '<div class="profile-body"><h3 class="section-title">Identificação</h3><div class="facts">' + fact('Atributo',attributes.join(', ')) + fact('Tipo',types.join(', ')) + fact('Estreia registrada',release) + fact('Anticorpo X',data.xAntibody ? 'Sim' : 'Não') + '</div>' +
+          (description ? '<section class="profile-section"><h3 class="section-title">Sobre</h3><p class="description">' + esc(description) + '</p><span class="lang-note">Descrição da fonte em inglês.</span></section>' : '') +
+          '<section class="profile-section"><h3 class="section-title">Grupos</h3><div class="badge-row" style="max-width:none;margin-top:0">' + badges(fields) + '</div></section>' +
+          '<section class="profile-section"><h3 class="section-title">Golpes e habilidades</h3><div class="skills">' + (skills.length ? skills.map(skill => '<div class="skill"><div class="skill-name">' + esc(skill.translation || skill.skill) + '</div><div class="skill-desc">' + esc(skill.description || skill.skill) + '</div></div>').join('') : '<span class="no-data">Sem habilidades cadastradas.</span>') + '</div></section>' +
+          '<section class="profile-section"><h3 class="section-title">Evoluções anteriores</h3><div class="evo-row">' + evolutionButtons(data.priorEvolutions,'Sem registro na fonte.') + '</div></section>' +
+          '<section class="profile-section"><h3 class="section-title">Próximas evoluções</h3><div class="evo-row">' + evolutionButtons(data.nextEvolutions,'Sem registro na fonte.') + '</div></section></div>';
+      };
+      const openDetail = async id => {
+        selectedId = Number(id);
+        render();
+        const item = byId.get(selectedId);
+        if (!item) return;
+        if (detailCache.has(selectedId)) { renderDetail(detailCache.get(selectedId)); return; }
+        profile.innerHTML = '<div class="loading-state"><div class="spinner" aria-hidden="true"></div>Carregando ficha de ' + esc(item.name) + '…</div>';
+        try {
+          const response = await fetch('https://digi-api.com/api/v1/digimon/' + encodeURIComponent(selectedId));
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          const data = await response.json();
+          detailCache.set(selectedId,data);
+          if (Number(selectedId) === Number(data.id)) renderDetail(data);
+        } catch (error) {
+          renderUnavailable(item);
+        }
+      };
+      const applyFilters = async () => {
+        const requestId = ++filterRequest;
+        visibleCount = PAGE_SIZE;
+        const level = levelFilter.value;
+        const attribute = attributeFilter.value;
+        showNotice('');
+        if (!level && !attribute) {
+          results = catalog.slice();
+          render();
+          return;
+        }
+        grid.innerHTML = '<div class="loading-state"><div class="spinner" aria-hidden="true"></div>Aplicando filtros ao catálogo…</div>';
+        try {
+          const params = new URLSearchParams({page:'0',pageSize:'2000'});
+          if (level) params.set('level',level);
+          if (attribute) params.set('attribute',attribute);
+          const response = await fetch('https://digi-api.com/api/v1/digimon?' + params.toString());
+          if (!response.ok) throw new Error('HTTP ' + response.status);
+          const data = await response.json();
+          if (requestId !== filterRequest) return;
+          results = (data.content || []).map(item => byId.get(Number(item.id)) || item);
+          render();
+        } catch (error) {
+          if (requestId !== filterRequest) return;
+          results = catalog.slice();
+          render();
+          showNotice('Não consegui aplicar o filtro remoto. A busca local continua disponível.');
+        }
+      };
+
+      document.getElementById('total-count').textContent = catalog.length.toLocaleString('pt-BR');
+      grid.addEventListener('click',event => { const button = event.target.closest('[data-id]'); if (button) openDetail(button.dataset.id); });
+      profile.addEventListener('click',event => { const button = event.target.closest('[data-open-id]'); if (button) openDetail(button.dataset.openId); });
+      moreRow.addEventListener('click',event => { if (event.target.id === 'show-more') { visibleCount += PAGE_SIZE; render(); } });
+      search.addEventListener('input',() => { visibleCount = PAGE_SIZE; render(); });
+      levelFilter.addEventListener('change',applyFilters);
+      attributeFilter.addEventListener('change',applyFilters);
+      render();
+      if (byId.has(1)) openDetail(1);
+      else profile.innerHTML = '<div class="loading-state">O catálogo local não foi carregado. Confira se catalog.js está junto deste arquivo.</div>';
+    })();
+  </script>
+</body>
+</html>
+
