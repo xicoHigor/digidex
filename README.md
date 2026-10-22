@@ -1,25 +1,37 @@
 # DigiDex
 
-Primeira versão da enciclopédia de Digimon, inspirada na estrutura do projeto Pokédex: catálogo pesquisável, filtros, ficha detalhada e uma base PostgreSQL relacional.
+Enciclopédia interativa de Digimon com catálogo pesquisável, filtros, fichas detalhadas e uma estrutura PostgreSQL relacional.
 
-## Abrir
+## Abrir o site
 
-Abra `index.html` no navegador. O catálogo básico fica junto do projeto em `catalog.js` e `catalog.json`; as fichas detalhadas e os filtros por nível e atributo consultam a DAPI quando usados.
+- Site: https://xicohigor.github.io/digidex/
+- Repositório: https://github.com/xicoHigor/digidex
 
 ## Arquivos
 
-- `index.html`: interface navegável em português.
-- `catalog.js` e `catalog.json`: snapshot local de 1.488 registros com ID, nome e imagem.
-- `schema.sql`: estrutura relacional inicial para PostgreSQL.
-- `seed_catalog.sql`: carga inicial do catálogo básico.
+- `index.html`: interface em português.
+- `catalog.js` e `catalog.json`: catálogo local de 1.488 registros com ID, nome e imagem.
+- `schema.sql`: estrutura das 12 tabelas, índices e view `vw_digidex`.
+- `seed_catalog.sql`: Digimon, níveis, atributos, tipos e grupos.
+- `seed_skills.sql`: habilidades.
+- `seed_relationships.sql`: relações dos Digimon com níveis, atributos, tipos, grupos e habilidades.
+- `seed_evolutions.sql`: evoluções direcionadas, da origem para o destino.
 
-## Dados
+## Carregar os dados no PostgreSQL
 
-O catálogo foi obtido em 22 de outubro de 2026 pela lista da [DAPI — Digimon API](https://digi-api.com/). A documentação informa que a base reúne fontes oficiais e de fãs, principalmente Wikimon, e que a API não é afiliada à Bandai. A interface usa os IDs dessa base, que identificam registros da API.
+Execute os arquivos nesta ordem:
 
-As fichas complementares mostram níveis, tipos, atributos, grupos, descrição, habilidades e evoluções conforme a disponibilidade de cada registro na DAPI. Algumas descrições estão em inglês porque são exibidas no idioma fornecido pela fonte.
+1. `schema.sql`
+2. `seed_catalog.sql`
+3. `seed_skills.sql`
+4. `seed_relationships.sql`
+5. `seed_evolutions.sql`
 
-## PostgreSQL
+Os scripts de carga usam `ON CONFLICT`, então podem ser executados novamente para atualizar ou completar os registros.
 
-Execute `schema.sql` primeiro e depois `seed_catalog.sql`. A carga inicial inclui os IDs, nomes e URLs de imagem. Tabelas de níveis, tipos, atributos, grupos, habilidades e evoluções ficam prontas para receber os dados relacionais das fichas.
+O seed foi montado a partir das fichas detalhadas da [DAPI — Digimon API](https://digi-api.com/), consultadas em 22 de outubro de 2026. Ele inclui 1.488 Digimon, 9 níveis, 7 atributos, 154 tipos, 10 grupos, 3.780 habilidades e as relações de níveis, atributos, tipos, grupos, habilidades e evoluções disponíveis na fonte.
+
+## Observação sobre os dados
+
+A DAPI reúne dados de fontes oficiais e de fãs e não é afiliada à Bandai. Os IDs seguem os identificadores da API. Algumas informações, como descrição ou evolução, podem estar indisponíveis para registros específicos.
 
